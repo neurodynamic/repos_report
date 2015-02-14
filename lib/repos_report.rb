@@ -5,10 +5,12 @@ module ReposReport
 			
     repos = Repo.find_all_in_or_below(directory)
 
-    puts "STATUS OF REPOS:\n\n"
+    puts
 
     repos.each do |r|
       puts r.concise_status(Repo.indentation_of_status_for(repos))
     end
+
+    puts
 	end
 end
