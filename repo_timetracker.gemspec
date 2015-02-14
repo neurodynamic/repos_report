@@ -1,7 +1,7 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'repo_timetracker/version'
+require 'repos_report/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "repos_report"
