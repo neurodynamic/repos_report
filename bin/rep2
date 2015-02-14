@@ -2,8 +2,13 @@
 
 require_relative '../lib/repos_report'
 
-if ARGV[0]
+case ARGV[0]
+when 'list'
+  ReposReport.list_all_repos(ARGV[1])
+
+when /\//
   ReposReport.print_status_of_projects_under(ARGV[0])
+
 else
   puts "Run 'rep2 [directory_path]' get a report on the status of repos in that directory."
 end

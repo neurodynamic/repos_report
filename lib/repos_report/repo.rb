@@ -2,6 +2,8 @@ require_relative 'repo_class'
 require 'colorize'
 
 class Repo
+  attr_accessor :directory
+
   def initialize(directory)
     @directory = directory
   end

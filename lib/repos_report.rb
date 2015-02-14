@@ -13,4 +13,16 @@ module ReposReport
 
     puts
 	end
+
+  def self.list_all_repos(directory)
+    repos = Repo.find_all_in_or_below(directory)
+
+    puts
+
+    repos.each do |repo|
+      puts repo.directory
+    end
+
+    puts
+  end
 end
