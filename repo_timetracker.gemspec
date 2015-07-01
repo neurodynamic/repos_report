@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["developer@neurodynamic.io"]
   spec.summary       = %q{A gem that reports on the status of all repos under a given directory.}
   spec.description   = %q{}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/neurodynamic/repos_report"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
