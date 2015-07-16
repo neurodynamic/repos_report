@@ -9,14 +9,12 @@ class Repo
   end
 
   def project_name_length
-    @directory.split("/").last.length
+    project_name.length
   end
 
   def concise_status(error_indentation)
-    project_name = @directory.split('/').last
 
-    error_indentation = error_indentation
-    whitespace_after_project_name = ' '*(error_indentation - project_name.length)
+    whitespace_after_project_name = ' '*(error_indentation - project_name_length)
 
     message = project_name
     issues = [
@@ -25,7 +23,7 @@ class Repo
       ].compact.join(', ')
 
 
-    if unpulled_or_unpushed_commits or 
+    if  unpulled_or_unpushed_commits or 
         uncommitted_changes
 
       message = "#{message}#{whitespace_after_project_name}#{issues}".red
@@ -34,6 +32,14 @@ class Repo
     end
 
     message
+  end
+
+
+
+  private
+
+  def project_name
+    @directory.split("/").last
   end
 
   def unpulled_or_unpushed_commits
