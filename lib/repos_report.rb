@@ -1,7 +1,7 @@
 require_relative 'repos_report/repo'
 
 module ReposReport
-	def self.print_status_of_projects_under(directory)
+  def self.print_status_of_projects_under(directory)
 			
     repos = Repo.find_all_in_or_below(directory)
 
@@ -12,7 +12,7 @@ module ReposReport
     end
 
     puts
-	end
+  end
 
   def self.list_all_repos(directory)
     repos = Repo.find_all_in_or_below(directory)
