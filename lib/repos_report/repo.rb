@@ -11,11 +11,11 @@ class Repo
     project_name.length
   end
 
-  def concise_status(error_indentation)
+  def concise_status(whitespace_padding)
     if issues.any?
-      message_with_issues(error_indentation).red
+      message_with_issues(whitespace_padding).red
     else
-      message_with_no_issues(error_indentation).green
+      message_with_no_issues(whitespace_padding).green
     end
   end
 
@@ -27,16 +27,16 @@ class Repo
     @directory.split("/").last
   end
 
-  def message_with_issues(error_indentation)
-    project_name + whitespace_padding(error_indentation) + issues.join(', ')
+  def message_with_issues(whitespace_padding)
+    project_name + whitespace_padding(whitespace_padding) + issues.join(', ')
   end
 
-  def message_with_no_issues(error_indentation)
-    project_name + whitespace_padding(error_indentation) + 'ALL GOOD'
+  def message_with_no_issues(whitespace_padding)
+    project_name + whitespace_padding(whitespace_padding) + 'ALL GOOD'
   end
 
-  def whitespace_padding(error_indentation)
-    ' ' * (error_indentation - project_name_length)
+  def whitespace_padding(whitespace_padding)
+    ' ' * (whitespace_padding - project_name_length)
   end
 
   def issues
