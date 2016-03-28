@@ -1,4 +1,3 @@
-require_relative 'repo_class'
 require 'colorize'
 
 class Repo
@@ -13,25 +12,11 @@ class Repo
   end
 
   def concise_status(error_indentation)
-
-    whitespace_after_project_name = ' '*(error_indentation - project_name_length)
-
-    message = project_name
-    issues = [
-      unpulled_or_unpushed_commits, 
-      uncommitted_changes
-      ].compact.join(', ')
-
-
-    if  unpulled_or_unpushed_commits or 
-        uncommitted_changes
-
-      message = "#{message}#{whitespace_after_project_name}#{issues}".red
+    if issues.any?
+      message_with_issues(error_indentation).red
     else
-      message = "#{message}#{whitespace_after_project_name}ALL GOOD".green
+      message_with_no_issues(error_indentation).green
     end
-
-    message
   end
 
 
@@ -40,6 +25,25 @@ class Repo
 
   def project_name
     @directory.split("/").last
+  end
+
+  def message_with_issues(error_indentation)
+    project_name + whitespace_padding(error_indentation) + issues.join(', ')
+  end
+
+  def message_with_no_issues(error_indentation)
+    project_name + whitespace_padding(error_indentation) + 'ALL GOOD'
+  end
+
+  def whitespace_padding(error_indentation)
+    ' ' * (error_indentation - project_name_length)
+  end
+
+  def issues
+    [
+      unpulled_or_unpushed_commits, 
+      uncommitted_changes
+    ].compact
   end
 
   def unpulled_or_unpushed_commits
