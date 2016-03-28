@@ -1,3 +1,5 @@
+![Gem output](https://raw.githubusercontent.com/neurodynamic/repos_report/master/example_output.png)
+
 # Purpose
 
 Prints info on the status of all repos under a given directory.
