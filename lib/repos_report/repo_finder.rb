@@ -18,15 +18,15 @@ module RepoFinder
       end
     end
 
+
+
+    private
+
     def repos_in(directory)
       return [] if folders_in(directory).empty?
 
       folders_with_repos_in(directory).map { |d| Repo.new(d) }
     end
-
-
-
-    private
 
     def folders_without_repos_in(directory)
       directories = folders_in(directory)
