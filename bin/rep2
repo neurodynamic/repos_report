@@ -2,12 +2,22 @@
 
 require_relative '../lib/repos_report'
 
+def get_directory(directory_arg)
+  if directory_arg
+    directory_arg.sub(/\/\z/,'') # Remove trailing slashes
+  else
+    Dir.pwd # Current directory if none specified
+  end
+end
+
 case ARGV[0]
 when 'list'
-  ReposReport.list_all_repos(ARGV[1])
+  directory = get_directory(ARGV[1])
+  ReposReport.list_all_repos(directory)
 
 when /\//
-  ReposReport.print_status_of_projects_under(ARGV[0])
+  directory = get_directory(ARGV[0])
+  ReposReport.print_status_of_projects_under(directory)
 
 else
   puts "Run 'rep2 [directory_path]' get a report on the status of repos in that directory."
