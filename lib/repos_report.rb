@@ -4,42 +4,39 @@ module ReposReport
   class << self
     def print_status_of_projects_under(directory)
       repos = RepoFinder.repos_in_or_below(directory)
+      padding = whitespace_padding_for(repos)
 
-      if repos.any?
-        print_statuses_of(repos)
-      else
-        puts "No repos found in this directory."
+      puts_repo_data(repos) do |repo|
+        repo.concise_status(padding)
       end
     end
 
     def list_all_repos(directory)
       repos = RepoFinder.repos_in_or_below(directory)
 
-      newline_pad_output do
-        repos.each do |repo|
-          puts repo.directory
-        end
-      end
+      puts_repo_data(repos, &:directory)
     end
 
     private
 
-    def print_statuses_of(repos)
-      padding_amount = whitespace_padding_for(repos)
+    def puts_repo_data(repos, &block)
+      if repos.any?
+        puts
+        puts_all(repos, &block)
+        puts
+      else
+        puts "No repos found."
+      end
+    end
 
-      newline_pad_output do
-        repos.each do |r|
-          puts r.concise_status(padding_amount)
-        end
+    def puts_all(items, &stringy_block)
+      items.each do |item|
+        puts stringy_block.call(item)
       end
     end
 
     def whitespace_padding_for(repos)
       longest_repo_project_name(repos) + 3
-    end
-
-    def newline_pad_output
-      puts; yield; puts
     end
 
     def longest_repo_project_name(array_of_repos)
