@@ -15,10 +15,11 @@ when 'list'
   directory = get_directory(ARGV[1])
   ReposReport.list_all_repos(directory)
 
-when /\//
-  directory = get_directory(ARGV[0])
-  ReposReport.print_status_of_projects_under(directory)
+when /(-h)|(--help)/
+  puts "Run 'rep2 [directory_path]' get a report on the status of repos in that directory."
+  puts "Run 'rep2 list [directory_path]' to get a list of the paths of repos in that directory."
 
 else
-  puts "Run 'rep2 [directory_path]' get a report on the status of repos in that directory."
+  directory = get_directory(ARGV[0])
+  ReposReport.print_status_of_projects_under(directory)
 end
