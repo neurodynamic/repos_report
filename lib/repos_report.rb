@@ -4,10 +4,10 @@ module ReposReport
   class << self
     def print_status_of_projects_under(directory)
       repos = RepoFinder.repos_in_or_below(directory)
-      padding = whitespace_padding_for(repos)
 
       puts_repo_data(repos) do |repo|
-        repo.concise_status(padding)
+        @padding ||= whitespace_padding_for(repos)
+        repo.concise_status(@padding)
       end
     end
 
