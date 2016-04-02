@@ -21,11 +21,16 @@ module RepoFinder
     end
 
     def repos_in_subdirectories_of(directory)
-      subdirectories = subdirectories_in(directory)
+      subdirectories = folders_without_repos_in(directory)
 
-      subdirectories.reduce([]) do |repos, subdirectory| 
-        repos += repos_in_or_below(subdirectory)
+      subdirectories.reduce([]) do |repos, subdirectory|
+        repos + repos_in_or_below(subdirectory)
       end
+    end
+
+    def folders_without_repos_in(directory)
+      directories = subdirectories_in(directory)
+      directories.delete_if { |d| contains_repo?(d) }
     end
 
     def contains_repo?(directory_path)
