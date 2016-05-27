@@ -1,3 +1,3 @@
 module ReposReport
-  VERSION = "4.0.2"
+  VERSION = "5.0.1"
 end
