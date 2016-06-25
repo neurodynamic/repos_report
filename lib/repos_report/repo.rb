@@ -36,15 +36,11 @@ class Repo
   end
 
   def message_with_issues(whitespace_padding)
-    project_name + whitespace_padding(whitespace_padding) + issues.join(', ')
+    project_name.ljust(whitespace_padding) + issues.join(', ')
   end
 
   def message_with_no_issues(whitespace_padding)
-    project_name + whitespace_padding(whitespace_padding) + 'ALL GOOD'
-  end
-
-  def whitespace_padding(whitespace_padding)
-    ' ' * (whitespace_padding - project_name_length)
+    project_name.ljust(whitespace_padding) + 'ALL GOOD'
   end
 
   def issues
